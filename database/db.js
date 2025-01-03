@@ -3,15 +3,15 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const uri = process.env.MONGO_URI;
+const url = process.env.MONGO_URI;
 
-if (!uri) {
+if (!url) {
   console.error("Error: MONGO_URI is not defined in the .env file.");
   process.exit(1);
 }
 
 mongoose
-  .connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("MongoDB connected!"))
   .catch((err) => console.error("MongoDB connection error:", err));
 
@@ -41,6 +41,6 @@ const bookingSchema = new mongoose.Schema({
   },
 });
 
-const Booking = mongoose.model("Booking", bookingSchema);
+const db = mongoose.model("Booking", bookingSchema);
 
-export default Booking;
+export default db;
